@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -18,564 +17,95 @@
     --white: #f0f4ff;
     --border: rgba(37,99,199,0.2);
   }
-
-- { margin: 0; padding: 0; box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
-
-body {
-background: var(–black);
-color: var(–white);
-font-family: ‘Rajdhani’, sans-serif;
-font-weight: 400;
-overflow-x: hidden;
-}
-
-/* ─── NOISE OVERLAY ─── */
-body::before {
-content: ‘’;
-position: fixed;
-inset: 0;
-background-image: url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 256 256’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘noise’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23noise)’ opacity=‘0.04’/%3E%3C/svg%3E”);
-pointer-events: none;
-z-index: 9999;
-opacity: 0.35;
-}
-
-/* ─── NAV ─── */
-nav {
-position: fixed;
-top: 0; left: 0; right: 0;
-z-index: 100;
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 22px 48px;
-background: linear-gradient(to bottom, rgba(8,8,8,0.95), transparent);
-backdrop-filter: blur(4px);
-}
-
-.nav-logo {
-font-family: ‘Bebas Neue’, sans-serif;
-font-size: 1.5rem;
-letter-spacing: 0.12em;
-color: var(–chrome);
-}
-
-.nav-logo span { color: var(–gold); }
-
-.nav-links {
-display: flex;
-gap: 36px;
-list-style: none;
-}
-
-.nav-links a {
-color: var(–silver);
-text-decoration: none;
-font-size: 0.85rem;
-letter-spacing: 0.18em;
-text-transform: uppercase;
-font-weight: 600;
-transition: color 0.2s;
-}
-
-.nav-links a:hover { color: var(–gold); }
-
-/* ─── HERO ─── */
-.hero {
-min-height: 100vh;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: flex-start;
-padding: 0 10vw;
-position: relative;
-overflow: hidden;
-}
-
-.hero-bg {
-position: absolute;
-inset: 0;
-background:
-radial-gradient(ellipse 80% 60% at 70% 50%, rgba(37,99,199,0.12) 0%, transparent 65%),
-radial-gradient(ellipse 50% 80% at 10% 90%, rgba(255,255,255,0.03) 0%, transparent 60%),
-linear-gradient(160deg, #080d18 0%, #05080f 100%);
-}
-
-.hero-line {
-width: 60px;
-height: 2px;
-background: var(–gold);
-margin-bottom: 28px;
-animation: expandLine 1s ease forwards;
-}
-
-@keyframes expandLine {
-from { width: 0; opacity: 0; }
-to { width: 60px; opacity: 1; }
-}
-
-.hero-eyebrow {
-font-size: 0.75rem;
-letter-spacing: 0.35em;
-text-transform: uppercase;
-color: var(–gold);
-font-weight: 600;
-margin-bottom: 18px;
-opacity: 0;
-animation: fadeUp 0.8s ease 0.2s forwards;
-}
-
-.hero h1 {
-font-family: ‘Bebas Neue’, sans-serif;
-font-size: clamp(4rem, 10vw, 9rem);
-line-height: 0.92;
-letter-spacing: 0.04em;
-color: #ffffff;
-opacity: 0;
-animation: fadeUp 0.9s ease 0.35s forwards;
-}
-
-.hero h1 .chrome {
--webkit-text-stroke: 2px #ffffff;
-color: #ffffff;
-}
-
-.hero-sub {
-margin-top: 28px;
-font-size: 1.1rem;
-color: #cbd5e1;
-letter-spacing: 0.06em;
-max-width: 420px;
-line-height: 1.7;
-font-weight: 300;
-opacity: 0;
-animation: fadeUp 0.9s ease 0.5s forwards;
-}
-
-.hero-cta {
-margin-top: 48px;
-display: flex;
-gap: 16px;
-flex-wrap: wrap;
-opacity: 0;
-animation: fadeUp 0.9s ease 0.65s forwards;
-}
-
-.btn-primary {
-display: inline-block;
-padding: 14px 36px;
-background: #2563c7;
-color: #ffffff;
-font-family: ‘Rajdhani’, sans-serif;
-font-size: 0.85rem;
-font-weight: 700;
-letter-spacing: 0.2em;
-text-transform: uppercase;
-text-decoration: none;
-transition: background 0.2s, transform 0.15s;
-}
-.btn-primary:hover {
-background: #3b82f6;
-transform: translateY(-2px);
-}
-.btn-outline {
-display: inline-block;
-padding: 13px 36px;
-border: 1px solid #2563c7;
-color: #ffffff;
-font-family: ‘Rajdhani’, sans-serif;
-font-size: 0.85rem;
-font-weight: 700;
-letter-spacing: 0.2em;
-text-transform: uppercase;
-text-decoration: none;
-transition: border-color 0.2s, color 0.2s, transform 0.15s;
-}
-.btn-outline:hover {
-border-color: #3b82f6;
-color: #3b82f6;
-transform: translateY(-2px);
-}
-
-.hero-scroll {
-position: absolute;
-bottom: 40px;
-left: 10vw;
-display: flex;
-align-items: center;
-gap: 12px;
-color: var(–silver);
-font-size: 0.7rem;
-letter-spacing: 0.25em;
-text-transform: uppercase;
-opacity: 0;
-animation: fadeIn 1s ease 1.2s forwards;
-}
-
-.hero-scroll::before {
-content: ‘’;
-width: 40px;
-height: 1px;
-background: var(–silver);
-}
-
-@keyframes fadeUp {
-from { opacity: 0; transform: translateY(24px); }
-to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeIn {
-from { opacity: 0; }
-to { opacity: 1; }
-}
-
-/* ─── SECTION SHARED ─── */
-section {
-padding: 110px 10vw;
-}
-
-.section-label {
-font-size: 0.7rem;
-letter-spacing: 0.4em;
-text-transform: uppercase;
-color: var(–gold);
-font-weight: 600;
-margin-bottom: 14px;
-}
-
-.section-title {
-font-family: ‘Bebas Neue’, sans-serif;
-font-size: clamp(2.4rem, 5vw, 4rem);
-letter-spacing: 0.05em;
-color: var(–white);
-line-height: 1;
-margin-bottom: 48px;
-}
-
-.divider {
-width: 100%;
-height: 1px;
-background: var(–border);
-margin: 0;
-}
-
-/* ─── SERVICES ─── */
-#services { background: var(–dark); }
-
-.services-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-gap: 2px;
-}
-
-.service-card {
-background: var(–card);
-padding: 40px 36px;
-border-top: 2px solid transparent;
-transition: border-color 0.25s, background 0.25s;
-position: relative;
-overflow: hidden;
-}
-
-.service-card::before {
-content: ‘’;
-position: absolute;
-inset: 0;
-background: linear-gradient(135deg, rgba(37,99,199,0.07), transparent 60%);
-opacity: 0;
-transition: opacity 0.3s;
-}
-
-.service-card:hover {
-border-top-color: var(–gold);
-background: #101828;
-}
-
-.service-card:hover::before { opacity: 1; }
-
-.service-icon {
-font-size: 1.8rem;
-margin-bottom: 20px;
-}
-
-.service-name {
-font-family: ‘Bebas Neue’, sans-serif;
-font-size: 1.6rem;
-letter-spacing: 0.06em;
-color: var(–chrome);
-margin-bottom: 10px;
-}
-
-.service-desc {
-font-size: 0.9rem;
-color: var(–silver);
-line-height: 1.7;
-font-weight: 300;
-margin-bottom: 24px;
-}
-
-.service-price {
-font-family: ‘Bebas Neue’, sans-serif;
-font-size: 2rem;
-color: var(–gold);
-letter-spacing: 0.04em;
-}
-
-.service-price-note {
-font-size: 0.75rem;
-color: var(–silver);
-letter-spacing: 0.1em;
-margin-top: 2px;
-}
-
-/* ─── ADD-ONS ─── */
-#addons { background: var(–black); }
-
-.addons-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-gap: 1px;
-background: var(–border);
-border: 1px solid var(–border);
-}
-
-.addon-item {
-background: var(–black);
-padding: 28px 30px;
-display: flex;
-justify-content: space-between;
-align-items: center;
-transition: background 0.2s;
-}
-
-.addon-item:hover { background: var(–card); }
-
-.addon-name {
-font-size: 0.95rem;
-font-weight: 600;
-letter-spacing: 0.06em;
-color: var(–chrome);
-}
-
-.addon-price {
-font-family: ‘Bebas Neue’, sans-serif;
-font-size: 1.3rem;
-color: var(–gold);
-letter-spacing: 0.05em;
-}
-
-/* ─── WHY ─── */
-#why { background: var(–dark); }
-
-.why-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-gap: 40px;
-}
-
-.why-item {
-border-left: 2px solid var(–gold);
-padding-left: 24px;
-}
-
-.why-title {
-font-family: ‘Bebas Neue’, sans-serif;
-font-size: 1.3rem;
-color: var(–chrome);
-letter-spacing: 0.06em;
-margin-bottom: 10px;
-}
-
-.why-text {
-font-size: 0.9rem;
-color: var(–silver);
-line-height: 1.7;
-font-weight: 300;
-}
-
-/* ─── BOOKING ─── */
-#booking { background: var(–black); }
-
-.booking-inner {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 80px;
-align-items: start;
-}
-
-.booking-info p {
-color: var(–silver);
-font-size: 1rem;
-line-height: 1.8;
-font-weight: 300;
-margin-bottom: 36px;
-}
-
-.contact-block {
-display: flex;
-flex-direction: column;
-gap: 20px;
-}
-
-.contact-row {
-display: flex;
-align-items: center;
-gap: 16px;
-padding: 18px 24px;
-border: 1px solid var(–border);
-text-decoration: none;
-transition: border-color 0.2s, background 0.2s;
-}
-
-.contact-row:hover {
-border-color: var(–gold);
-background: rgba(37,99,199,0.06);
-}
-
-.contact-icon { font-size: 1.2rem; }
-
-.contact-label {
-font-size: 0.7rem;
-color: var(–silver);
-letter-spacing: 0.2em;
-text-transform: uppercase;
-}
-
-.contact-value {
-font-size: 1rem;
-color: var(–chrome);
-font-weight: 600;
-letter-spacing: 0.05em;
-}
-
-.booking-form {
-display: flex;
-flex-direction: column;
-gap: 16px;
-}
-
-.form-group {
-display: flex;
-flex-direction: column;
-gap: 6px;
-}
-
-.form-group label {
-font-size: 0.7rem;
-letter-spacing: 0.2em;
-text-transform: uppercase;
-color: var(–silver);
-font-weight: 600;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-background: var(–card);
-border: 1px solid var(–border);
-color: var(–white);
-padding: 14px 18px;
-font-family: ‘Rajdhani’, sans-serif;
-font-size: 1rem;
-font-weight: 400;
-outline: none;
-transition: border-color 0.2s;
--webkit-appearance: none;
-}
-
-.form-group select option { background: var(–card); }
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-border-color: var(–gold);
-}
-
-.form-group textarea { resize: vertical; min-height: 100px; }
-
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
-.form-submit {
-padding: 16px;
-background: var(–gold);
-color: var(–black);
-font-family: ‘Rajdhani’, sans-serif;
-font-size: 0.9rem;
-font-weight: 700;
-letter-spacing: 0.2em;
-text-transform: uppercase;
-border: none;
-cursor: pointer;
-transition: background 0.2s, transform 0.15s;
-margin-top: 8px;
-}
-
-.form-submit:hover {
-background: var(–gold-light);
-transform: translateY(-2px);
-}
-
-.form-note {
-font-size: 0.78rem;
-color: var(–silver);
-letter-spacing: 0.05em;
-opacity: 0.7;
-}
-
-/* ─── FOOTER ─── */
-footer {
-background: var(–dark);
-border-top: 1px solid var(–border);
-padding: 40px 10vw;
-display: flex;
-justify-content: space-between;
-align-items: center;
-flex-wrap: wrap;
-gap: 16px;
-}
-
-.footer-logo {
-font-family: ‘Bebas Neue’, sans-serif;
-font-size: 1.3rem;
-letter-spacing: 0.12em;
-color: var(–chrome);
-}
-
-.footer-logo span { color: var(–gold); }
-
-.footer-copy {
-font-size: 0.78rem;
-color: var(–silver);
-letter-spacing: 0.1em;
-opacity: 0.6;
-}
-
-.footer-ig a {
-color: var(–gold);
-text-decoration: none;
-font-size: 0.85rem;
-font-weight: 600;
-letter-spacing: 0.12em;
-}
-
-/* ─── RESPONSIVE ─── */
-@media (max-width: 768px) {
-nav { padding: 18px 24px; }
-.nav-links { display: none; }
-section { padding: 80px 6vw; }
-.booking-inner { grid-template-columns: 1fr; gap: 48px; }
-.form-row { grid-template-columns: 1fr; }
-footer { padding: 32px 6vw; flex-direction: column; align-items: flex-start; }
-}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: #ffffff; font-family: 'Rajdhani', sans-serif; font-weight: 400; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 9999; opacity: 0.35; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 22px 48px; background: linear-gradient(to bottom, rgba(5,8,15,0.97), transparent); backdrop-filter: blur(4px); }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.12em; color: #ffffff; }
+  .nav-logo span { color: #2563c7; }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a { color: #a0aec0; text-decoration: none; font-size: 0.85rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600; transition: color 0.2s; }
+  .nav-links a:hover { color: #2563c7; }
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 0 10vw; position: relative; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(37,99,199,0.12) 0%, transparent 65%), radial-gradient(ellipse 50% 80% at 10% 90%, rgba(255,255,255,0.03) 0%, transparent 60%), linear-gradient(160deg, #080d18 0%, #05080f 100%); }
+  .hero-line { width: 60px; height: 2px; background: #2563c7; margin-bottom: 28px; animation: expandLine 1s ease forwards; }
+  @keyframes expandLine { from { width: 0; opacity: 0; } to { width: 60px; opacity: 1; } }
+  .hero-eyebrow { font-size: 0.75rem; letter-spacing: 0.35em; text-transform: uppercase; color: #2563c7; font-weight: 600; margin-bottom: 18px; opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards; }
+  .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 10vw, 9rem); line-height: 0.92; letter-spacing: 0.04em; color: #ffffff; opacity: 0; animation: fadeUp 0.9s ease 0.35s forwards; }
+  .hero h1 .chrome { color: #ffffff; }
+  .hero-sub { margin-top: 28px; font-size: 1.1rem; color: #cbd5e1; letter-spacing: 0.06em; max-width: 420px; line-height: 1.7; font-weight: 300; opacity: 0; animation: fadeUp 0.9s ease 0.5s forwards; }
+  .hero-cta { margin-top: 48px; display: flex; gap: 16px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.9s ease 0.65s forwards; }
+  .btn-primary { display: inline-block; padding: 14px 36px; background: #2563c7; color: #ffffff; font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; transition: background 0.2s, transform 0.15s; }
+  .btn-primary:hover { background: #3b82f6; transform: translateY(-2px); }
+  .btn-outline { display: inline-block; padding: 13px 36px; border: 1px solid #2563c7; color: #ffffff; font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; transition: border-color 0.2s, color 0.2s, transform 0.15s; }
+  .btn-outline:hover { border-color: #3b82f6; color: #3b82f6; transform: translateY(-2px); }
+  .hero-scroll { position: absolute; bottom: 40px; left: 10vw; display: flex; align-items: center; gap: 12px; color: #a0aec0; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; opacity: 0; animation: fadeIn 1s ease 1.2s forwards; }
+  .hero-scroll::before { content: ''; width: 40px; height: 1px; background: #a0aec0; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  section { padding: 110px 10vw; }
+  .section-label { font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase; color: #2563c7; font-weight: 600; margin-bottom: 14px; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.4rem, 5vw, 4rem); letter-spacing: 0.05em; color: #ffffff; line-height: 1; margin-bottom: 48px; }
+  .divider { width: 100%; height: 1px; background: rgba(37,99,199,0.2); margin: 0; }
+  #services { background: var(--dark); }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2px; }
+  .service-card { background: var(--card); padding: 40px 36px; border-top: 2px solid transparent; transition: border-color 0.25s, background 0.25s; position: relative; overflow: hidden; }
+  .service-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(37,99,199,0.07), transparent 60%); opacity: 0; transition: opacity 0.3s; }
+  .service-card:hover { border-top-color: #2563c7; background: #101828; }
+  .service-card:hover::before { opacity: 1; }
+  .service-icon { font-size: 1.8rem; margin-bottom: 20px; }
+  .service-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.06em; color: #ffffff; margin-bottom: 10px; }
+  .service-desc { font-size: 0.9rem; color: #a0aec0; line-height: 1.7; font-weight: 300; margin-bottom: 24px; }
+  .service-price { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: #2563c7; letter-spacing: 0.04em; }
+  .service-price-note { font-size: 0.75rem; color: #a0aec0; letter-spacing: 0.1em; margin-top: 2px; }
+  #addons { background: var(--black); }
+  .addons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: rgba(37,99,199,0.2); border: 1px solid rgba(37,99,199,0.2); }
+  .addon-item { background: var(--black); padding: 28px 30px; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; }
+  .addon-item:hover { background: var(--card); }
+  .addon-name { font-size: 0.95rem; font-weight: 600; letter-spacing: 0.06em; color: #ffffff; }
+  .addon-price { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: #2563c7; letter-spacing: 0.05em; }
+  #why { background: var(--dark); }
+  .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 40px; }
+  .why-item { border-left: 2px solid #2563c7; padding-left: 24px; }
+  .why-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: #ffffff; letter-spacing: 0.06em; margin-bottom: 10px; }
+  .why-text { font-size: 0.9rem; color: #a0aec0; line-height: 1.7; font-weight: 300; }
+  #booking { background: var(--black); }
+  .booking-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .booking-info p { color: #a0aec0; font-size: 1rem; line-height: 1.8; font-weight: 300; margin-bottom: 36px; }
+  .contact-block { display: flex; flex-direction: column; gap: 20px; }
+  .contact-row { display: flex; align-items: center; gap: 16px; padding: 18px 24px; border: 1px solid rgba(37,99,199,0.2); text-decoration: none; transition: border-color 0.2s, background 0.2s; }
+  .contact-row:hover { border-color: #2563c7; background: rgba(37,99,199,0.06); }
+  .contact-icon { font-size: 1.2rem; }
+  .contact-label { font-size: 0.7rem; color: #a0aec0; letter-spacing: 0.2em; text-transform: uppercase; }
+  .contact-value { font-size: 1rem; color: #ffffff; font-weight: 600; letter-spacing: 0.05em; }
+  .booking-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: #a0aec0; font-weight: 600; }
+  .form-group input, .form-group select, .form-group textarea { background: var(--card); border: 1px solid rgba(37,99,199,0.2); color: #ffffff; padding: 14px 18px; font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 400; outline: none; transition: border-color 0.2s; -webkit-appearance: none; }
+  .form-group select option { background: var(--card); }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #2563c7; }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-submit { padding: 16px; background: #2563c7; color: #ffffff; font-family: 'Rajdhani', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; border: none; cursor: pointer; transition: background 0.2s, transform 0.15s; margin-top: 8px; }
+  .form-submit:hover { background: #3b82f6; transform: translateY(-2px); }
+  .form-note { font-size: 0.78rem; color: #a0aec0; letter-spacing: 0.05em; opacity: 0.7; }
+  footer { background: var(--dark); border-top: 1px solid rgba(37,99,199,0.2); padding: 40px 10vw; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.12em; color: #ffffff; }
+  .footer-logo span { color: #2563c7; }
+  .footer-copy { font-size: 0.78rem; color: #a0aec0; letter-spacing: 0.1em; opacity: 0.6; }
+  .footer-ig a { color: #2563c7; text-decoration: none; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.12em; }
+  @media (max-width: 768px) {
+    nav { padding: 18px 24px; }
+    .nav-links { display: none; }
+    section { padding: 80px 6vw; }
+    .booking-inner { grid-template-columns: 1fr; gap: 48px; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { padding: 32px 6vw; flex-direction: column; align-items: flex-start; }
+  }
 </style>
-
 </head>
 <body>
-
-<!-- NAV -->
-
 <nav>
   <div class="nav-logo">Soul<span>shine</span></div>
   <ul class="nav-links">
@@ -585,9 +115,6 @@ footer { padding: 32px 6vw; flex-direction: column; align-items: flex-start; }
     <li><a href="#booking">Book Now</a></li>
   </ul>
 </nav>
-
-<!-- HERO -->
-
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-line"></div>
@@ -600,109 +127,70 @@ footer { padding: 32px 6vw; flex-direction: column; align-items: flex-start; }
   </div>
   <div class="hero-scroll">Scroll to explore</div>
 </section>
-
 <div class="divider"></div>
-
-<!-- SERVICES -->
-
 <section id="services">
   <p class="section-label">What We Offer</p>
   <h2 class="section-title">Our Services</h2>
   <div class="services-grid">
-
-```
-<div class="service-card">
-  <img src="https://raw.githubusercontent.com/soulshineautodetailing-ux/Soulshine-detailing/main/IMG_9953.png" alt="Exterior Wash & Shine" style="width:100%;height:180px;object-fit:cover;margin-bottom:20px;display:block;"/>
-  <div class="service-icon">✦</div>
-  <div class="service-name">Exterior Wash & Shine</div>
-  <p class="service-desc">Hand wash, clay bar, tire dressing, window cleaning, and a quality wax or sealant to protect your paint.</p>
-  <div class="service-price">$60+</div>
-  <div class="service-price-note">Starting price · varies by size</div>
-</div>
-
-<div class="service-card">
-  <div class="service-icon">✦</div>
-  <div class="service-name">Interior Detail</div>
-  <p class="service-desc">Full vacuum, wipe-down of all surfaces, door jambs, dashboard, console, and streak-free windows inside.</p>
-  <div class="service-price">$80+</div>
-  <div class="service-price-note">Starting price · varies by condition</div>
-</div>
-
-<div class="service-card">
-  <div class="service-icon">✦</div>
-  <div class="service-name">Full Detail</div>
-  <p class="service-desc">The complete package — exterior wash & protection combined with a thorough interior deep clean. Best value.</p>
-  <div class="service-price">$130+</div>
-  <div class="service-price-note">Most popular · sedan pricing</div>
-</div>
-
-<div class="service-card">
-  <div class="service-icon">✦</div>
-  <div class="service-name">Upholstery Deep Clean</div>
-  <p class="service-desc">Steam cleaning and shampooing of cloth seats, carpets, and floor mats. Stain extraction and odor treatment.</p>
-  <div class="service-price">$100+</div>
-  <div class="service-price-note">Pricing based on scope</div>
-</div>
-
-<div class="service-card">
-  <div class="service-icon">✦</div>
-  <div class="service-name">Paint Decontamination</div>
-  <p class="service-desc">Iron fallout removal, tar/bitumen extraction, and clay bar treatment for a truly clean paint surface.</p>
-  <div class="service-price">$70+</div>
-  <div class="service-price-note">Add-on or standalone</div>
-</div>
-
-<div class="service-card">
-  <div class="service-icon">✦</div>
-  <div class="service-name">Custom Quote</div>
-  <p class="service-desc">Have a unique vehicle, a fleet, or a specific job in mind? Reach out and we'll build a package around your needs.</p>
-  <div class="service-price">Let's Talk</div>
-  <div class="service-price-note">Contact for pricing</div>
-</div>
-```
-
+    <div class="service-card">
+      <img src="https://raw.githubusercontent.com/soulshineautodetailing-ux/Soulshine-detailing/main/IMG_9953.png" alt="Exterior Wash & Shine" style="width:100%;height:180px;object-fit:cover;margin-bottom:20px;display:block;"/>
+      <div class="service-icon">✦</div>
+      <div class="service-name">Exterior Wash & Shine</div>
+      <p class="service-desc">Hand wash, clay bar, tire dressing, window cleaning, and a quality wax or sealant to protect your paint.</p>
+      <div class="service-price">$60+</div>
+      <div class="service-price-note">Starting price · varies by size</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">✦</div>
+      <div class="service-name">Interior Detail</div>
+      <p class="service-desc">Full vacuum, wipe-down of all surfaces, door jambs, dashboard, console, and streak-free windows inside.</p>
+      <div class="service-price">$80+</div>
+      <div class="service-price-note">Starting price · varies by condition</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">✦</div>
+      <div class="service-name">Full Detail</div>
+      <p class="service-desc">The complete package — exterior wash & protection combined with a thorough interior deep clean. Best value.</p>
+      <div class="service-price">$130+</div>
+      <div class="service-price-note">Most popular · sedan pricing</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">✦</div>
+      <div class="service-name">Upholstery Deep Clean</div>
+      <p class="service-desc">Steam cleaning and shampooing of cloth seats, carpets, and floor mats. Stain extraction and odor treatment.</p>
+      <div class="service-price">$100+</div>
+      <div class="service-price-note">Pricing based on scope</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">✦</div>
+      <div class="service-name">Paint Decontamination</div>
+      <p class="service-desc">Iron fallout removal, tar/bitumen extraction, and clay bar treatment for a truly clean paint surface.</p>
+      <div class="service-price">$70+</div>
+      <div class="service-price-note">Add-on or standalone</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">✦</div>
+      <div class="service-name">Custom Quote</div>
+      <p class="service-desc">Have a unique vehicle, a fleet, or a specific job in mind? Reach out and we'll build a package around your needs.</p>
+      <div class="service-price">Let's Talk</div>
+      <div class="service-price-note">Contact for pricing</div>
+    </div>
   </div>
 </section>
-
 <div class="divider"></div>
-
-<!-- ADD-ONS -->
-
 <section id="addons">
   <p class="section-label">Upgrades</p>
   <h2 class="section-title">Add-Ons</h2>
   <div class="addons-grid">
-    <div class="addon-item">
-      <span class="addon-name">Odor Elimination</span>
-      <span class="addon-price">+$25</span>
-    </div>
-    <div class="addon-item">
-      <span class="addon-name">Engine Bay Cleaning</span>
-      <span class="addon-price">+$40</span>
-    </div>
-    <div class="addon-item">
-      <span class="addon-name">Headlight Restoration</span>
-      <span class="addon-price">+$35</span>
-    </div>
-    <div class="addon-item">
-      <span class="addon-name">Ceramic Spray Coating</span>
-      <span class="addon-price">+$50</span>
-    </div>
-    <div class="addon-item">
-      <span class="addon-name">Pet Hair Removal</span>
-      <span class="addon-price">+$30</span>
-    </div>
-    <div class="addon-item">
-      <span class="addon-name">Trim Restoration</span>
-      <span class="addon-price">+$20</span>
-    </div>
+    <div class="addon-item"><span class="addon-name">Odor Elimination</span><span class="addon-price">+$25</span></div>
+    <div class="addon-item"><span class="addon-name">Engine Bay Cleaning</span><span class="addon-price">+$40</span></div>
+    <div class="addon-item"><span class="addon-name">Headlight Restoration</span><span class="addon-price">+$35</span></div>
+    <div class="addon-item"><span class="addon-name">Ceramic Spray Coating</span><span class="addon-price">+$50</span></div>
+    <div class="addon-item"><span class="addon-name">Pet Hair Removal</span><span class="addon-price">+$30</span></div>
+    <div class="addon-item"><span class="addon-name">Trim Restoration</span><span class="addon-price">+$20</span></div>
   </div>
 </section>
-
 <div class="divider"></div>
-
-<!-- WHY -->
-
 <section id="why">
   <p class="section-label">Why Soulshine</p>
   <h2 class="section-title">We Come To You</h2>
@@ -725,91 +213,92 @@ footer { padding: 32px 6vw; flex-direction: column; align-items: flex-start; }
     </div>
   </div>
 </section>
-
 <div class="divider"></div>
-
-<!-- BOOKING -->
-
 <section id="booking">
   <p class="section-label">Ready to Shine</p>
   <h2 class="section-title">Book Your Detail</h2>
   <div class="booking-inner">
-
-```
-<div class="booking-info">
-  <p>Fill out the form and we'll get back to you within 24 hours to confirm your drop-off appointment. You can also reach us directly on Instagram or by phone.</p>
-  <div class="contact-block">
-    <a href="https://instagram.com/soulshine_detailing" target="_blank" class="contact-row">
-      <span class="contact-icon">📸</span>
-      <div>
-        <div class="contact-label">Instagram</div>
-        <div class="contact-value">@soulshine_detailing</div>
-      </div>
-    </a>
-    <a href="tel:+15314848062" class="contact-row">
-      <span class="contact-icon">📞</span>
-      <div>
-        <div class="contact-label">Phone / Text</div>
-        <div class="contact-value">(531) 484-8062</div>
-      </div>
-    </a>
-    <a href="/cdn-cgi/l/email-protection#70231f051c0318191e155e1105041f14150411191c191e1730171f1f171c155e131f1d" class="contact-row">
-      <span class="contact-icon">✉️</span>
-      <div>
-        <div class="contact-label">Email</div>
-        <div class="contact-value">Soulshine.autodetailing&#64;google.com</div>
-      </div>
-    </a>
-    <div class="contact-row">
-      <span class="contact-icon">📍</span>
-      <div>
-        <div class="contact-label">Location</div>
-        <div class="contact-value">Omaha, NE — provided upon booking</div>
+    <div class="booking-info">
+      <p>Fill out the form and we'll get back to you within 24 hours to confirm your drop-off appointment. You can also reach us directly on Instagram or by phone.</p>
+      <div class="contact-block">
+        <a href="https://instagram.com/soulshine_detailing" target="_blank" class="contact-row">
+          <span class="contact-icon">📸</span>
+          <div>
+            <div class="contact-label">Instagram</div>
+            <div class="contact-value">@soulshine_detailing</div>
+          </div>
+        </a>
+        <a href="tel:+15314848062" class="contact-row">
+          <span class="contact-icon">📞</span>
+          <div>
+            <div class="contact-label">Phone / Text</div>
+            <div class="contact-value">(531) 484-8062</div>
+          </div>
+        </a>
+        <a href="mailto:Soulshine.autodetailing@google.com" class="contact-row">
+          <span class="contact-icon">✉️</span>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">Soulshine.autodetailing&#64;google.com</div>
+          </div>
+        </a>
+        <div class="contact-row">
+          <span class="contact-icon">📍</span>
+          <div>
+            <div class="contact-label">Location</div>
+            <div class="contact-value">Omaha, NE — provided upon booking</div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="booking-form">
-  <div class="form-row">
-    <div class="form-group">
-      <label>First Name</label>
-      <input type="text" placeholder="Tony"/>
+    <div class="booking-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="First name"/>
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Last name"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Phone / Email</label>
+        <input type="text" placeholder="Your contact info"/>
+      </div>
+      <div class="form-group">
+        <label>Vehicle (Year, Make, Model)</label>
+        <input type="text" placeholder="e.g. 2020 Honda Accord"/>
+      </div>
+      <div class="form-group">
+        <label>Service Requested</label>
+        <select>
+          <option value="">Select a service...</option>
+          <option>Exterior Wash & Shine</option>
+          <option>Interior Detail</option>
+          <option>Full Detail</option>
+          <option>Upholstery Deep Clean</option>
+          <option>Paint Decontamination</option>
+          <option>Custom Quote</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Preferred Date & Time</label>
+        <input type="text" placeholder="e.g. Saturday morning"/>
+      </div>
+      <div class="form-group">
+        <label>Notes (optional)</label>
+        <textarea placeholder="Anything we should know — pet hair, stains, condition of vehicle, etc."></textarea>
+      </div>
+      <button class="form-submit" onclick="alert('Thanks! We\'ll be in touch within 24 hours.')">Send Booking Request</button>
+      <p class="form-note">* Booking form sends an inquiry. We'll confirm availability and finalize details with you directly.</p>
     </div>
-    <div class="form-group">
-      <label>Last Name</label>
-      <input type="text" placeholder="Smith"/>
-    </div>
   </div>
-  <div class="form-group">
-    <label>Phone / Email</label>
-    <input type="text" placeholder="Your contact info"/>
-  </div>
-  <div class="form-group">
-    <label>Vehicle (Year, Make, Model)</label>
-    <input type="text" placeholder="e.g. 2020 Honda Accord"/>
-  </div>
-  <div class="form-group">
-    <label>Service Requested</label>
-    <select>
-      <option value="">Select a service...</option>
-      <option>Exterior Wash & Shine</option>
-      <option>Interior Detail</option>
-      <option>Full Detail</option>
-      <option>Upholstery Deep Clean</option>
-      <option>Paint Decontamination</option>
-      <option>Custom Quote</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label>Preferred Date & Time</label>
-    <input type="text" placeholder="e.g. Saturday morning"/>
-  </div>
-  <div class="form-group">
-    <label>Notes (optional)</label>
-    <textarea placeholder="Anything we should know — pet hair, stains, condition of vehicle, etc."></textarea>
-  </div>
-  <button class="form-submit" onclick="alert('Thanks! We\'ll be in touch within 24 hours.')">Send Booking Request</button>
-  <p class="form-note">* Booking form sends an inquiry. We'll confirm availability and finalize details with you directly.</p>
-</d
-```
+</section>
+<footer>
+  <div class="footer-logo">Soul<span>shine</span> Detailing</div>
+  <div class="footer-copy">© 2026 Soulshine Detailing · Omaha, NE · All rights reserved</div>
+  <div class="footer-ig"><a href="https://instagram.com/soulshine_detailing" target="_blank">@soulshine_detailing</a></div>
+</footer>
+</body>
+</html>
